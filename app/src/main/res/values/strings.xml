@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TruDocTask</string>
+    <string name="error"> An Error Happened  </string>
+    <string name="price"> Price Category :  </string>
+    <string name="name"> Name :  </string>
+    <string name="category"> Category :  </string>
+    <string name="rating"> Rating :  </string>
+    <string name="review_count"> Review Count :  </string>
+    <string name="phone"> Phone number  :  </string>
+    <string name="server_error">Server error happen please try again </string>
+    <string name="bad_request">"Bad request "</string>
+    <string name="no_network_connection">No network connection</string>
+    <string name="categories">Categories :</string>
+    <string name="search_by_name">Search by business name</string>
+    <string name="search">Search </string>
+</resources>
