@@ -14,4 +14,5 @@ interface DetailsApiService {
     @GET("businesses/{id}")
      suspend fun getDetails(@Path("id") id:String?):BusinessModel
 
+
 }

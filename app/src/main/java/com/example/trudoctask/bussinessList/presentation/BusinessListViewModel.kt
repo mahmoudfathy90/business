@@ -17,17 +17,16 @@ class BusinessListViewModel @Inject constructor(private val item: ItemDataSource
         val config = PagedList.Config.Builder().setPageSize(PAGE_SIZE)
             .setEnablePlaceholders(false)
             .build()
-        itemPagedList = LivePagedListBuilder(item, config).build()
+        itemPagedList = LivePagedListBuilder(item, config)
+            .build()
     }
 
     fun stateEvent() = item.stateEvent()
 
-    fun search(term:String){
-        item.getDataSource().search(term)
-        val config = PagedList.Config.Builder().setPageSize(PAGE_SIZE)
-            .setEnablePlaceholders(false)
-            .build()
-        itemPagedList = LivePagedListBuilder(item, config).build()
+     fun search(term: String) {
+        item.search(term)
+        itemPagedList.value?.dataSource?.invalidate()
+
     }
 
     override fun onCleared() {

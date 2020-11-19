@@ -19,6 +19,7 @@ class ItemDataSource @Inject constructor(private val useCase: ListUseCase) :
     PageKeyedDataSource<Int, BusinessModel>() {
 
 
+
     private var defaultViewState = BusinessListState()
     val stateEvent = MutableLiveData<BusinessListState>()
     private var modelRequest = ListRequestModel(DEFALUT_CITY, limit = PAGE_SIZE, offset = FIRSTPAGE)
@@ -35,9 +36,7 @@ class ItemDataSource @Inject constructor(private val useCase: ListUseCase) :
         }) { result ->
             callback.onResult(result.data, null, FIRSTPAGE)
         }
-
     }
-
     fun search(term:String){
         modelRequest = modelRequest.copy(term = term)
     }

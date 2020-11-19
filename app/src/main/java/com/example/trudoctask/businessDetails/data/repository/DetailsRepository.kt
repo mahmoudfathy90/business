@@ -5,10 +5,10 @@ import com.example.trudoctask.businessDetails.data.service.response.BusinessMode
 import com.example.trudoctask.businessDetails.domain.IDetailsRepository
 import javax.inject.Inject
 
-class DetailsRepository @Inject constructor(val detailsApiService: DetailsApiService) :IDetailsRepository
-{
+class DetailsRepository @Inject constructor(val detailsApiService: DetailsApiService) :
+    IDetailsRepository {
     override suspend fun getDetails(id: String?): BusinessModel {
-       return detailsApiService.getDetails(id)
+        return detailsApiService.getDetails(id)
     }
 
 }

@@ -88,8 +88,10 @@ class BusinessListAdapter(var detailsInterface: OpenDetailsInterface) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ItemViewHolder) {
-            val item: BusinessModel = getItem(position)!!
-            holder.bind(item)
+            if (itemCount - 1 > position) {
+                val item: BusinessModel = getItem(position)!!
+                holder.bind(item)
+            }
         }
 
     }

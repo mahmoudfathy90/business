@@ -23,6 +23,12 @@ class ItemDataSourceFactory @Inject constructor(private val item: ItemDataSource
 
     fun stateEvent() = item.stateEvent
 
+    fun getLiveData() = itemLiveDataSource
     fun getDataSource() = item
+    fun search(term: String) {
+        item.search(term)
+//        itemLiveDataSource.value?.invalidate()
+
+    }
 
 }

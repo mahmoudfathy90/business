@@ -37,6 +37,14 @@ class BusinessListFragment : BaseFragmentWithInjector(), OpenDetailsInterface {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnSearch.setOnClickListener {
+            businessAdapter.submitList(null)
+            businessListViewModel.search(binding.etSearch.text.toString())
+        }
+    }
+
 
     override fun getFragmentVM(): Class<out ViewModel> {
         return BusinessListViewModel::class.java
