@@ -13,4 +13,5 @@
     <string name="categories">Categories :</string>
     <string name="search_by_name">Search by business name</string>
     <string name="search">Search </string>
+    <string name="call_business">Call %s</string>
 </resources>

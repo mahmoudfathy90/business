@@ -1,9 +1,11 @@
 package com.example.trudoctask.utils
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -51,4 +53,10 @@ fun TextView.checkError(throwable: Throwable?) {
     {
         text=context.getString(R.string.no_network_connection)
     }
+}
+
+fun View.hideKeyboard() {
+    val imm: InputMethodManager? =
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+    imm?.hideSoftInputFromWindow(windowToken, 0)
 }

@@ -37,7 +37,7 @@ class ItemDataSource @Inject constructor(private val useCase: ListUseCase) :
             callback.onResult(result.data, null, FIRSTPAGE)
         }
     }
-    fun search(term:String){
+    fun search(term:String?){
         modelRequest = modelRequest.copy(term = term)
     }
 

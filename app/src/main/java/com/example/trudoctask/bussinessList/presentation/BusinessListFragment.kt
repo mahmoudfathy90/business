@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.trudoctask.BaseFragmentWithInjector
 import com.example.trudoctask.databinding.BusinessList
+import com.example.trudoctask.utils.hideKeyboard
 
 
 class BusinessListFragment : BaseFragmentWithInjector(), OpenDetailsInterface {
@@ -39,10 +41,9 @@ class BusinessListFragment : BaseFragmentWithInjector(), OpenDetailsInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnSearch.setOnClickListener {
-            businessAdapter.submitList(null)
-            businessListViewModel.search(binding.etSearch.text.toString())
-        }
+        businessListViewModel.hideSoftKeyboard.observe(viewLifecycleOwner, Observer {
+            getView()?.hideKeyboard()
+        })
     }
 
 
@@ -51,10 +52,12 @@ class BusinessListFragment : BaseFragmentWithInjector(), OpenDetailsInterface {
     }
 
 
-    override fun openDetails(id: String?) {
-        val direction =
-            BusinessListFragmentDirections.actionListScreenToDetailsFragment(id)
-        findNavController().navigate(direction)
+    override fun openDetails(id: String?, name : String?) {
+        name?.let {
+            val direction =
+                BusinessListFragmentDirections.actionListScreenToDetailsFragment(id, it)
+            findNavController().navigate(direction)
+        }
     }
 
     override fun retry() {

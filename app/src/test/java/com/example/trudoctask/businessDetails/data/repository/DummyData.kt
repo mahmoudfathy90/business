@@ -1,5 +1,4 @@
 package com.example.trudoctask.businessDetails.data.repository
-
 const val DummyData = "{\n" +
         "    \"id\": \"gR9DTbKCvezQlqvD7_FzPw\",\n" +
         "    \"alias\": \"north-india-restaurant-san-francisco\",\n" +

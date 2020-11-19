@@ -1,26 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/listScreen">
+
+
     <fragment
         android:id="@+id/listScreen"
         android:name="com.example.trudoctask.bussinessList.presentation.BusinessListFragment"
-        android:label="ListScreen" >
+        android:label="Businesses">
+
         <action
             android:id="@+id/action_listScreen_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.trudoctask.businessDetails.presentation.screens.details.DetailsFragment"
-        android:label="DetailsFragment" >
+        android:label="{title}">
+
         <argument
             android:name="id"
             app:argType="string"
             app:nullable="true" />
-    </fragment>
 
+        <argument
+            android:name="title"
+            app:argType="string" />
+
+    </fragment>
 
 </navigation>

@@ -25,7 +25,6 @@
         android:layout_marginBottom="@dimen/margin_half"
         app:cardCornerRadius="@dimen/margin_half"
         app:cardElevation="@dimen/margin_half"
-        android:onClick="@{(v)->handler.openDetails(model.id)}"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout

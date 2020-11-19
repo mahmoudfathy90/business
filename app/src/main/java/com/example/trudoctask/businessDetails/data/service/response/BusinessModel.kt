@@ -53,6 +53,8 @@ data class BusinessModel(
         return sb.toString()
     }
 
+    val firstImage : String?
+        get() = photos?.firstOrNull()
 
     data class Category(
         @SerializedName("alias")
@@ -107,5 +109,8 @@ data class BusinessModel(
         var state: String?,
         @SerializedName("zip_code")
         var zipCode: String?
-    )
+    ){
+        val displayedLocation : String?
+            get() = displayAddress?.joinToString(", ")
+    }
 }

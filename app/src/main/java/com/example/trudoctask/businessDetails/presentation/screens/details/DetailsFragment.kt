@@ -1,18 +1,18 @@
 package com.example.trudoctask.businessDetails.presentation.screens.details
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.navArgs
 import com.example.trudoctask.BaseFragmentWithInjector
 import com.example.trudoctask.R
 import com.example.trudoctask.databinding.ActivityDetailsBinding
-import com.example.trudoctask.utils.makeCall
-import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.custom_details_layout.view.*
+import com.example.trudoctask.utils.ContextUtils.goToMap
+import com.example.trudoctask.utils.ContextUtils.makeCall
+import com.example.trudoctask.utils.ContextUtils.openUrlInBrowser
+import com.example.trudoctask.utils.ContextUtils.share
 
 
 class DetailsFragment : BaseFragmentWithInjector() {
@@ -25,6 +25,11 @@ class DetailsFragment : BaseFragmentWithInjector() {
     private lateinit var binding: ActivityDetailsBinding
     private val navArg by navArgs<DetailsFragmentArgs>()
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,12 +45,36 @@ class DetailsFragment : BaseFragmentWithInjector() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.getDetails(navArg.id)
-        phone.value.setOnClickListener {
-            it.makeCall(viewModel.event.value?.data?.phone)
-        }
+        viewModel.callEvent.observe(viewLifecycleOwner, Observer {
+            context?.makeCall(it)
+        })
+        viewModel.showOnMapEvent.observe(viewLifecycleOwner, Observer {
+            context?.goToMap(it.first, it.second)
+
+        })
+        viewModel.visitSiteEvent.observe(viewLifecycleOwner, Observer {
+            context?.openUrlInBrowser(it)
+        })
+        viewModel.shareEvent.observe(viewLifecycleOwner, Observer {
+            context?.share(it)
+        })
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.home_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.share ->{
+                viewModel.onShareClicked()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun getFragmentVM(): Class<out ViewModel> {
         return DetailsViewModel::class.java
@@ -53,3 +82,4 @@ class DetailsFragment : BaseFragmentWithInjector() {
 
 
 }
+

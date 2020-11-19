@@ -10,6 +10,10 @@
 
     </style>
 
+    <style parent="@style/ThemeOverlay.AppCompat.ActionBar" name="ToolbarTheme">
+    <item name="colorControlNormal">@color/white</item>
+</style>
+
 
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/lightGrey</item>
@@ -44,7 +48,5 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <color name="black">#000000</color>
-    <color name="darkGray">#515151</color>
     <dimen name="font_big">20sp</dimen>
 </resources>

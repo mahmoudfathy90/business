@@ -1,6 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
 
 
     <data class="BusinessList">
@@ -15,22 +19,20 @@
             name="viewModel"
             type="com.example.trudoctask.bussinessList.presentation.BusinessListViewModel" />
 
-
     </data>
+
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:visibility="@{viewModel.stateEvent().error==null? View.VISIBLE:View.GONE}"
-
             app:constraint_referenced_ids="etSearch,btnSearch" />
 
         <EditText
@@ -40,7 +42,8 @@
             android:layout_margin="@dimen/margin_half"
             android:background="@drawable/search_background"
             android:hint="@string/search_by_name"
-            android:padding="@dimen/margin_half"
+            android:padding="@dimen/margin_medium"
+            android:text="@={viewModel.searchText}"
             android:textColor="@color/darkGray"
             android:textColorHint="@color/darkGray"
             android:textSize="@dimen/font_twelve"
@@ -48,17 +51,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_half"
+            android:onClick="@{()->viewModel.search()}"
             android:text="@string/search"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="@id/etSearch"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/clearSearch"
             app:layout_constraintTop_toTopOf="@id/etSearch" />
+
+        <ImageButton
+            android:id="@+id/clearSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/margin_half"
+            android:background="@android:color/transparent"
+            android:onClick="@{()->viewModel.clearSearch()}"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:visibility="@{viewModel.isSearching ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/btnSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnSearch"
+            app:srcCompat="@drawable/ic_clear" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
@@ -72,7 +90,6 @@
             app:layout_constraintTop_toBottomOf="@id/etSearch"
             app:viewState="@{viewModel.stateEvent()}" />
 
-
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="match_parent"
@@ -81,7 +98,6 @@
             android:visibility="@{viewModel.stateEvent().loading? View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/error"
